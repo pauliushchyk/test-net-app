@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using testnetapp.Data.Interfaces.Services;
+using testnetapp.Data.Models;
 
 namespace test_net_app.Controllers
 {
@@ -7,36 +10,46 @@ namespace test_net_app.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
+        private readonly IBookService _bookServcie;
+
+        public BooksController(IBookService bookService)
+        {
+            this._bookServcie = bookService;
+        }
+
         // GET api/books
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<List<Book>> GetAsync()
         {
-            return new string[] { "value1", "value2" };
+            return await this._bookServcie.GetAllAsync();
         }
 
         // GET api/books/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<Book> GetAsync(int id)
         {
-            return "value";
+            return await this._bookServcie.GetAsync(id);
         }
 
         // POST api/books
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task PostAsync([FromBody] Book book)
         {
+            await this._bookServcie.CreateAsync(book);
         }
 
         // PUT api/books/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task PutAsync(int id, [FromBody] Book book)
         {
+            await this._bookServcie.UpdateAsync(book);
         }
 
         // DELETE api/books/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
+            await this._bookServcie.DeleteAsync(id);
         }
     }
 }
