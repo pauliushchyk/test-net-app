@@ -21,7 +21,7 @@ namespace testnetapp.Data
                  .WithMany(b => b.BookTags)
                  .HasForeignKey(bt => bt.BookId);
 
-                e.HasOne(bt => bt.Book)
+                e.HasOne(bt => bt.Tag)
                  .WithMany(t => t.BookTags)
                  .HasForeignKey(bt => bt.TagId);
             });

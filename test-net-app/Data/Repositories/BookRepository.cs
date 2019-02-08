@@ -31,10 +31,12 @@ namespace testnetapp.Data.Repositories
             }
         }
 
-        public async Task DeleteAsync(Book entity)
+        public async Task DeleteAsync(int id)
         {
             try
             {
+                var entity = await _context.Books.FindAsync(id);
+
                 _context.Books.Remove(entity);
 
                 await _context.SaveChangesAsync();
@@ -49,7 +51,10 @@ namespace testnetapp.Data.Repositories
         {
             try
             {
-                return await _context.Books.ToListAsync();
+                return await _context.Books
+                    .Include(b => b.BookTags)
+                    .ThenInclude(bt => bt.Tag)
+                    .ToListAsync();
             }
             catch
             {
@@ -61,7 +66,10 @@ namespace testnetapp.Data.Repositories
         {
             try
             {
-                return await _context.Books.FindAsync(id);
+                return await _context.Books
+                    .Include(b => b.BookTags)
+                    .ThenInclude(bt => bt.Tag)
+                    .FirstOrDefaultAsync(b => b.Id == id);
             }
             catch
             {

@@ -7,7 +7,7 @@ namespace testnetapp.Data.Interfaces.Repositories
     {
         Task<T> CreateAsync(T entity);
 
-        Task DeleteAsync(T entity);
+        Task DeleteAsync(int id);
 
         Task<List<T>> GetAllAsync();
 

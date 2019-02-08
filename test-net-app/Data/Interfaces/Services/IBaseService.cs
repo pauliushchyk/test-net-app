@@ -7,7 +7,7 @@ namespace testnetapp.Data.Interfaces.Services
     {
         Task<T> CreateAsync(T entity);
 
-        Task DeleteAsync(T entity);
+        Task DeleteAsync(int id);
 
         Task<List<T>> GetAllAsync();
 

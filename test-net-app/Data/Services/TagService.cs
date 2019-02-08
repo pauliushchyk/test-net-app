@@ -20,9 +20,9 @@ namespace testnetapp.Data.Services
             return await this._repository.CreateAsync(entity);
         }
 
-        public async Task DeleteAsync(Tag entity)
+        public async Task DeleteAsync(int id)
         {
-            await this._repository.DeleteAsync(entity);
+            await this._repository.DeleteAsync(id);
         }
 
         public async Task<List<Tag>> GetAllAsync()

@@ -31,10 +31,12 @@ namespace testnetapp.Data.Repositories
             }
         }
 
-        public async Task DeleteAsync(Tag entity)
+        public async Task DeleteAsync(int id)
         {
             try
             {
+                var entity = await _context.Tags.FindAsync(id);
+
                 _context.Tags.Remove(entity);
 
                 await _context.SaveChangesAsync();
