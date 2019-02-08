@@ -1,6 +1,8 @@
-﻿namespace testnetapp.Data.Interfaces.Repositories
+﻿using testnetapp.Data.Models;
+
+namespace testnetapp.Data.Interfaces.Repositories
 {
-    public interface ITagRepository
+    public interface ITagRepository : IBaseRepository<Tag>
     {
     }
 }
