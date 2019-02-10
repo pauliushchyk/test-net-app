@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using testnetapp.Data;
 using testnetapp.Data.Interfaces.Repositories;
 using testnetapp.Data.Interfaces.Services;
+using testnetapp.Data.Models;
 using testnetapp.Data.Repositories;
 using testnetapp.Data.Services;
 
@@ -41,9 +42,11 @@ namespace test_net_app
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
                 }, ServiceLifetime.Scoped);
 
+            services.AddScoped<IRepository<Book>, Repository<Book>>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
 
+            services.AddScoped<IService<Book>, Service<Book>>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<ITagService, TagService>();
         }
